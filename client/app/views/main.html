@@ -1,3 +1,20 @@
-<div ng-controller="MainController as vm">
-	<h1>{{ vm.greeting }}</h1>
+<div ng-controller="MainController as vm" layout="column">
+	<md-content layout-padding layout="column">
+	  <form ng-submit="$event.preventDefault()">
+	    <h1 id="banner">Playlytics</h1>
+	      <md-autocomplete
+	        md-selected-item="vm.selectedItem"
+	        md-search-text-change="vm.searchTextChange(vm.searchText)"
+	        md-search-text="vm.searchText"
+	        md-selected-item-change="vm.selectedItemChange(track)"
+	        md-items="track in vm.querySearch(vm.searchText)"
+	        md-item-text="track.name"
+	        md-min-length="0"
+	        placeholder="Search for a track">
+	      <span md-highlight-text="vm.searchText" md-highlight-flags="^i">
+	      	{{ track.name }} by {{ track.artists[0].name }}
+	      </span>
+	      </md-autocomplete>
+	 </form>
+	</md-content>
 </div>

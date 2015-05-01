@@ -1,2 +1,7 @@
-body {
-  margin: 0; }
+#banner {
+  font-family: Tahoma;
+  margin: 20px;
+  text-align: center; }
+
+md-content {
+  height: 400px; }
