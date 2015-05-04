@@ -5,6 +5,7 @@ var inject = require('gulp-inject');
 var bower = require('main-bower-files');
 var sass = require('gulp-ruby-sass');
 var series = require('stream-series');
+var jshint = require('gulp-jshint');
 
 gulp.task('index', function() {
 	var sources = gulp.src(bower(), {read: false});
@@ -24,6 +25,12 @@ gulp.task('styles', function() {
 			})
 			.pipe(gulp.dest(styles));
 });
+
+gulp.task('lint', function() {
+	return gulp.src('client/*.js')
+		.pipe(jshint())
+		.pipe(jshint.reporter('default'));
+})
 
 gulp.task('watch', function() {
 	gulp.watch('client/styles/*.scss', ['styles']);

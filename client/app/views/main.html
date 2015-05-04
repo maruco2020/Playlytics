@@ -1,8 +1,13 @@
 <div ng-controller="MainController as vm" layout="column">
-	<md-content layout-padding layout="column">
+	<h1 id="banner" class="animated bounceInDown">Playlytics</h1>
+	<md-content layout-padding class="animated fadeIn" layout="column">
 	  <form ng-submit="$event.preventDefault()">
-	    <h1 id="banner">Playlytics</h1>
-	      <md-autocomplete
+	  		<md-input-container flex>
+          <label>Name of playlist</label>
+          <input ng-model="vm.test" type="text"/>
+        </md-input-container>
+	      <md-autocomplete class="animated fadeIn"
+	      	ng-disabled="vm.isDisabled"
 	        md-selected-item="vm.selectedItem"
 	        md-search-text-change="vm.searchTextChange(vm.searchText)"
 	        md-search-text="vm.searchText"
@@ -11,10 +16,26 @@
 	        md-item-text="track.name"
 	        md-min-length="0"
 	        placeholder="Search for a track">
+	      <md-item-template>
 	      <span md-highlight-text="vm.searchText" md-highlight-flags="^i">
-	      	{{ track.name }} by {{ track.artists[0].name }}
+	      	<span id="trackName"> {{ track.name }} </span> by {{ track.artists[0].name }}
 	      </span>
-	      </md-autocomplete>
+	    	</md-item-template>
+	    </md-autocomplete>
 	 </form>
+		<div id="playlist" ng-sortable="{animation:200, draggable: '.tracks', filter: '.ignore'}">
+		<div id="total" class="ignore">
+			{{ vm.test }} {{ vm.timeConvert(vm.totalTime) }} {{ vm.total }}
+			<ng-md-icon icon="star" style="fill: yellow" size="20"><ng-md-icon>
+		</div>
+	 	<div class="tracks" ng-repeat="item in vm.items track by $index">
+	    {{ item.name }} {{ vm.timeConvert(item.duration_ms) }} {{ item.popularity }} {{ $index }}
+	    <md-button ng-click="vm.removeTrack($index)">Remove</md-button>
+	  </div>
+	  <div id="buttons" class="ignore">
+	  	<md-button ng-click="vm.console()" class="md-primary">Save</md-button>
+	  	<md-button ng-click="vm.clear()" class="md-warn">Clear</md-button>
+	  </div>
+	 </div>
 	</md-content>
 </div>
