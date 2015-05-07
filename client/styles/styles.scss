@@ -6,7 +6,7 @@ body {
 	margin-bottom: 20px;
 	margin-top: 20px;
 	text-align: center;
-	font-size: 4em;
+	font-size: 64px;
 	font-weight: 100;
 	color: #f35626;
 
@@ -18,6 +18,11 @@ body {
 
 md-content {
 	height: 100vh;
+
+	label {
+		font-size: 18px;
+	}
+
 	#auto {
 		ul {
 			max-height: 125px;
