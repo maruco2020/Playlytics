@@ -7,8 +7,9 @@ body {
   text-align: center;
   font-size: 4em;
   font-weight: 100;
-  color: #f35626;
-  letter-spacing: -.05em; }
+  color: #f35626; }
+  #banner #symbol {
+    color: #3574EC; }
 
 md-content {
   height: 100vh; }
