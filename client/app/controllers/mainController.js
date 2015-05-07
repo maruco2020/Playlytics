@@ -5,28 +5,30 @@
 
 	.controller('MainController', MainController);
 
-	MainController.$inject = ['Spotify', '$log', '$q', '$scope', '$rootScope'];
+	MainController.$inject = ['Spotify', '$log', '$q', '$scope', '$rootScope', '$mdDialog'];
 
-	function MainController(Spotify, $log, $q, $scope, $rootScope){
+	function MainController(Spotify, $log, $q, $scope, $rootScope, $mdDialog){
 
 		var vm = this;
 
-		vm.max = 5;
-		vm.isReadonly = true;
+		vm.alert = '';
 
 		vm.clear = clear;
-		vm.console = console;
-		vm.name = 'Your playlist';
-		vm.items = [];
-		vm.html = '';
-		vm.querySearch   = querySearch;
 		vm.cool = 0;
+		vm.name = 'Your playlist';
+		vm.html = '';
+		vm.isReadonly = true;
+		vm.items = [];
+		vm.max = 5;
+		vm.querySearch = querySearch;
 		vm.removeTrack = removeTrack;
+		vm.saveToLocal = saveToLocal;
 		vm.selectedItemChange = selectedItemChange;
 		vm.searchTextChange   = searchTextChange;
+		vm.showAlert = showAlert;
 		vm.timeConvert = timeConvert;
-		vm.totalTime = 0;
 		vm.total = 0;
+		vm.totalTime = 0;
 
 		function Playlist(name, list, pop, time) {
 			this.name = name;
@@ -38,23 +40,10 @@
 
 		function clear(){
 			vm.items = [];
-		}
 
-		function console(){
-			if( !vm.test ){
-				throw new Error('Enter a playlist name!')
-			} else {
-				var copy = vm.items.slice();
-				vm.items = [];
-
-				var playlist = new Playlist(vm.test, copy, vm.total, vm.totalTime);
-				localStorage.setItem(vm.test, JSON.stringify(playlist));
-
-				$log.info(playlist);
-				vm.totalTime = 0;
-				vm.total = 0;
-				vm.test = '';
-			}
+			vm.total = 0;
+			vm.totalTime = 0;
+			vm.name = '';
 		}
 
 		function format(query) {
@@ -86,8 +75,9 @@
 
 		function removeTrack(idx){
 			var remove = vm.items[idx];
+			vm.total = vm.total - vm.items[idx].popularity;
+			vm.totalTime = vm.totalTime - vm.items[idx].duration_ms;
 			vm.items.splice(idx, 1);
-			$log.info(vm.items);
 		}
 		function searchTextChange(text) {
 		  // $log.info('Text changed to ' + text);
@@ -103,6 +93,43 @@
 		  	vm.total = Math.floor(vm.cool / vm.items.length);
 		  }
 		}
+
+		function saveToLocal(){
+			if( !vm.name ){
+				throw new Error('Enter a playlist name!')
+			} else {
+				var copy = vm.items.slice();
+
+				var playlist = new Playlist(vm.name, copy, vm.total, vm.totalTime);
+				localStorage.setItem(vm.name, JSON.stringify(playlist));
+
+				$log.info(playlist);
+			}
+		}
+
+		function showAlert(ev) {
+		    var title = '', content = '';
+		    if( vm.name === 'Your playlist' || !vm.name ){
+		    	title = 'Error!';
+		    	content = 'Enter a unique playlist name!';
+		    } else if( localStorage.getItem( vm.name ) ){
+		    	title = 'Nice!';
+		    	content = 'Your playlist' + ' ' + vm.name + ' ' + 'has been updated.';
+		    	saveToLocal();
+		    } else {
+		    	title = 'Congrats!';
+		    	content = 'Your playlist' + ' ' + vm.name + ' ' + 'has been saved!';
+		    	saveToLocal();
+		    }
+		    $mdDialog.show(
+		      $mdDialog.alert()
+		        .title(title)
+		        .content(content)
+		        .ariaLabel('Alert Dialog Demo')
+		        .ok('Got it!')
+		        .targetEvent(ev)
+		    );
+		  };
 
 		function timeConvert(ms){
 			var minutes = Math.floor(ms / 60000);

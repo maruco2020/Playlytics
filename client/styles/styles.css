@@ -2,60 +2,56 @@ body {
   font-family: 'Roboto'; }
 
 #banner {
-  font-family: 'Roboto';
   margin-bottom: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
   text-align: center;
   font-size: 4em;
   font-weight: 100;
   color: #f35626;
   letter-spacing: -.05em; }
 
-#trackName {
-  font-size: 20px; }
-
-#playlist {
-  position: relative;
-  top: -100px;
-  z-index: -1;
-  margin: auto;
-  border: 1px solid black; }
-  #playlist div {
-    width: 33vw; }
-  #playlist #total {
-    background-color: teal;
-    color: white;
-    height: 50px; }
-    #playlist #total #listName {
-      font-size: 24px;
-      margin-left: 10px;
-      line-height: 50px;
-      font-weight: bold; }
-    #playlist #total #stats {
-      float: right;
-      line-height: 50px;
-      margin-right: 10px;
-      font-size: 20px; }
-  #playlist #buttons {
-    padding: 5px; }
-
 md-content {
   height: 100vh; }
+  md-content #auto ul {
+    max-height: 125px;
+    opacity: 0.8; }
+  md-content #playlist {
+    padding: 0;
+    position: relative;
+    top: 50px;
+    z-index: -1;
+    margin: 0 auto;
+    border: 1px solid black; }
+    md-content #playlist [role="button"] {
+      cursor: default; }
+    md-content #playlist #total {
+      background-color: teal;
+      color: white;
+      height: 50px; }
+      md-content #playlist #total #listName {
+        font-size: 24px;
+        margin-left: 10px;
+        line-height: 50px;
+        font-weight: bold; }
+      md-content #playlist #total #stats {
+        float: right;
+        line-height: 50px;
+        margin-right: 10px;
+        font-size: 20px; }
+    md-content #playlist .tracks .item {
+      padding: 5px 0px 5px 5px;
+      border-bottom: 2px dotted black;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-align: left;
+      cursor: hand; }
+      md-content #playlist .tracks .item #remove {
+        margin-right: 5px;
+        float: right;
+        top: -17px; }
+    md-content #playlist #buttons {
+      padding: 5px; }
 
-.list {
-  list-style: none outside none;
-  padding: 0; }
-
-.item {
-  padding: 5px 0px 5px 5px;
-  background-color: #EA8A8A;
-  border-bottom: 2px dotted teal;
-  font-size: 1.1em;
-  font-weight: bold;
-  text-align: left;
-  cursor: hand; }
-
-#remove {
-  margin-right: 5px;
-  float: right;
-  top: -17px; }
+.md-dialog-container md-dialog {
+  height: 40vh;
+  width: 30vw; }

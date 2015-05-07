@@ -2,11 +2,11 @@
 	<h1 id="banner" class="animated bounceInDown">Playlytics</h1>
 	<md-content layout-padding class="animated fadeIn" layout="column">
 	  <form ng-submit="$event.preventDefault()">
-	  		<md-input-container flex>
-          <label>Name of playlist</label>
-          <md-input ng-model="vm.name" type="text" maxlength="20"></md-input>
-        </md-input-container>
-	      <md-autocomplete class="animated fadeIn"
+	  	<md-input-container>
+        <label>Name of playlist</label>
+        <md-input ng-model="vm.name" type="text" maxlength="20"></md-input>
+      </md-input-container>
+	      <md-autocomplete id="auto" class="animated fadeIn"
 	      	ng-disabled="vm.isDisabled"
 	        md-selected-item="vm.selectedItem"
 	        md-search-text-change="vm.searchTextChange(vm.searchText)"
@@ -18,14 +18,15 @@
 	        placeholder="Search for a track">
 	      <md-item-template>
 	      <span md-highlight-text="vm.searchText" md-highlight-flags="^i">
-	      	<span id="trackName"> {{ track.name }} </span> by {{ track.artists[0].name }}
+	      	{{ track.name }} by {{ track.artists[0].name }}
 	      </span>
 	    	</md-item-template>
 	    </md-autocomplete>
-	 </form>
-		<div id="playlist">
+	  </form>
+		<div id="playlist" class="col-xl-6 col-lg-8 col-md-8 col-sm-10 col-xs-12">
 		<div id="total" class="ignore">
-			<span id="listName">{{ vm.name }}</span><span id="stats"> {{ vm.timeConvert(vm.totalTime) }}
+			<span id="listName">{{ vm.name }}</span>
+			<span id="stats">{{ vm.timeConvert(vm.totalTime) }}
 			<rating value="vm.total / 20" max="vm.max" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" readonly="vm.isReadonly"></rating></span>
 		</div>
 	   <div ui-sortable="sortableOptions" ng-model="vm.items" class="tracks">
@@ -36,7 +37,7 @@
 	     </div>
 	   </div>
 	  <div id="buttons" class="ignore">
-	  	<md-button ng-click="vm.console()" class="md-primary">Save</md-button>
+	  	<md-button ng-click="vm.showAlert($event)" class="md-primary">Save</md-button>
 	  	<md-button ng-click="vm.clear()" class="md-warn">Clear</md-button>
 	  </div>
 	 </div>
