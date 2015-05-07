@@ -4,7 +4,7 @@
 	  <form ng-submit="$event.preventDefault()">
 	  		<md-input-container flex>
           <label>Name of playlist</label>
-          <input ng-model="vm.test" type="text"/>
+          <md-input ng-model="vm.name" type="text" maxlength="20"></md-input>
         </md-input-container>
 	      <md-autocomplete class="animated fadeIn"
 	      	ng-disabled="vm.isDisabled"
@@ -23,15 +23,18 @@
 	    	</md-item-template>
 	    </md-autocomplete>
 	 </form>
-		<div id="playlist" ng-sortable="{animation:200, draggable: '.tracks', filter: '.ignore'}">
+		<div id="playlist">
 		<div id="total" class="ignore">
-			{{ vm.test }} {{ vm.timeConvert(vm.totalTime) }} {{ vm.total }}
-			<ng-md-icon icon="star" style="fill: yellow" size="20"><ng-md-icon>
+			<span id="listName">{{ vm.name }}</span><span id="stats"> {{ vm.timeConvert(vm.totalTime) }}
+			<rating value="vm.total / 20" max="vm.max" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" readonly="vm.isReadonly"></rating></span>
 		</div>
-	 	<div class="tracks" ng-repeat="item in vm.items track by $index">
-	    {{ item.name }} {{ vm.timeConvert(item.duration_ms) }} {{ item.popularity }} {{ $index }}
-	    <md-button ng-click="vm.removeTrack($index)">Remove</md-button>
-	  </div>
+	   <div ui-sortable="sortableOptions" ng-model="vm.items" class="tracks">
+	     <div ng-repeat="item in vm.items" class="item animated fadeIn">
+	       {{item.name}} by {{item.artists[0].name}} <br> {{ vm.timeConvert(item.duration_ms) }}
+	       <rating value="item.popularity / 20" max="vm.max" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" readonly="vm.isReadonly"></rating>
+	       <md-button id="remove" class="md-raised md-warn" ng-click="vm.removeTrack($index)">Remove</md-button>
+	     </div>
+	   </div>
 	  <div id="buttons" class="ignore">
 	  	<md-button ng-click="vm.console()" class="md-primary">Save</md-button>
 	  	<md-button ng-click="vm.clear()" class="md-warn">Clear</md-button>

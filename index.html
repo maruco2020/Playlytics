@@ -6,24 +6,26 @@
 		<link rel="stylesheet" type="text/css" href="bower_components/angular-material/angular-material.css" />
 		<link rel="stylesheet" type="text/css" href="client/animate.css" />
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,100' rel='stylesheet' type='text/css'>
+		<link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 	</head>
 	<body ng-app="Playlytics">
 		<div ui-view></div>
 		<!-- inject:js -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="bower_components/jquery-ui/jquery-ui.js"></script>
 		<script src="bower_components/angular/angular.js"></script>
 		<script src="bower_components/angular-animate/angular-animate.js"></script>
 		<script src="bower_components/angular-aria/angular-aria.js"></script>
 		<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 		<script src="bower_components/angular-material/angular-material.js"></script>
 		<script src="bower_components/angular-material-icons/angular-material-icons.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="client/ui-bootstrap-tpls-0.9.0.min.js"></script>
+		<!-- endInject -->
 		<script src="client/app/app.js"></script>
 		<script src="client/app/controllers/mainController.js"></script>
 		<script src="client/app/factories/spotify.js"></script>
-		<!-- endInject -->
 		<!-- Sortable.js -->
-		<script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
-
-		<!-- ng-sortable.js -->
-		<script src="http://rubaxa.github.io/Sortable/ng-sortable.js"></script>
+		<script src="client/sortable.js"></script>
 	</body>
 </html>

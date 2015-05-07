@@ -4,8 +4,9 @@
 	angular.module('Playlytics', [
 		'ngMaterial',
 		'ui.router',
-		'ng-sortable',
-		'ngMdIcons'
+		'ngMdIcons',
+		'ui.sortable',
+		'ui.bootstrap'
 	])
 
 	.config(config);

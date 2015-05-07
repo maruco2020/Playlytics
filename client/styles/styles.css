@@ -3,7 +3,8 @@ body {
 
 #banner {
   font-family: 'Roboto';
-  margin: 20px;
+  margin-bottom: 20px;
+  margin-top: 40px;
   text-align: center;
   font-size: 4em;
   font-weight: 100;
@@ -15,26 +16,46 @@ body {
 
 #playlist {
   position: relative;
+  top: -100px;
   z-index: -1;
   margin: auto;
   border: 1px solid black; }
   #playlist div {
-    width: 33vw;
-    padding: 10px; }
-  #playlist .tracks {
-    padding: 0px 0px 0px 5px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    line-height: 50px; }
-    #playlist .tracks ng-md-icon {
-      float: right; }
+    width: 33vw; }
   #playlist #total {
     background-color: teal;
-    text-align: right;
-    color: white; }
+    color: white;
+    height: 50px; }
+    #playlist #total #listName {
+      font-size: 24px;
+      margin-left: 10px;
+      line-height: 50px;
+      font-weight: bold; }
+    #playlist #total #stats {
+      float: right;
+      line-height: 50px;
+      margin-right: 10px;
+      font-size: 20px; }
   #playlist #buttons {
-    text-align: center;
-    padding: 2px; }
+    padding: 5px; }
 
 md-content {
   height: 100vh; }
+
+.list {
+  list-style: none outside none;
+  padding: 0; }
+
+.item {
+  padding: 5px 0px 5px 5px;
+  background-color: #EA8A8A;
+  border-bottom: 2px dotted teal;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: left;
+  cursor: hand; }
+
+#remove {
+  margin-right: 5px;
+  float: right;
+  top: -17px; }

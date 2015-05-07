@@ -8,12 +8,17 @@
 	MainController.$inject = ['Spotify', '$log', '$q', '$scope', '$rootScope'];
 
 	function MainController(Spotify, $log, $q, $scope, $rootScope){
+
 		var vm = this;
+
+		vm.max = 5;
+		vm.isReadonly = true;
 
 		vm.clear = clear;
 		vm.console = console;
-		vm.test = undefined;
+		vm.name = 'Your playlist';
 		vm.items = [];
+		vm.html = '';
 		vm.querySearch   = querySearch;
 		vm.cool = 0;
 		vm.removeTrack = removeTrack;
@@ -39,15 +44,16 @@
 			if( !vm.test ){
 				throw new Error('Enter a playlist name!')
 			} else {
-				$log.info(vm.items);
 				var copy = vm.items.slice();
-				$log.info(copy);
 				vm.items = [];
 
 				var playlist = new Playlist(vm.test, copy, vm.total, vm.totalTime);
 				localStorage.setItem(vm.test, JSON.stringify(playlist));
 
 				$log.info(playlist);
+				vm.totalTime = 0;
+				vm.total = 0;
+				vm.test = '';
 			}
 		}
 
@@ -90,7 +96,7 @@
 		function selectedItemChange(item) {
 		  // $log.info('Item changed to ' + JSON.stringify(item));
 		  if( item ){
-		  	$log.info(vm.items);
+		  	$log.info(item);
 		  	vm.items.push(item);
 		  	vm.totalTime = vm.totalTime + item.duration_ms;
 		  	vm.cool = vm.cool + item.popularity;
