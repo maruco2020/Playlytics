@@ -32,10 +32,10 @@ describe('MainController', function() {
 
 	it('should have methods', function() {
 		createController();
+		expect(typeof $scope.vm.addToPlaylist).toBe('function');
 		expect(typeof $scope.vm.querySearch).toBe('function');
 		expect(typeof $scope.vm.removeTrack).toBe('function');
 		expect(typeof $scope.vm.saveToLocal).toBe('function');
-		expect(typeof $scope.vm.searchTextChange).toBe('function');
 		expect(typeof $scope.vm.showAlert).toBe('function');
 		expect(typeof $scope.vm.timeConvert).toBe('function');
 

@@ -11,8 +11,8 @@
 
 		var vm = this;
 
+		vm.addToPlaylist = addToPlaylist;
 		vm.alert = '';
-
 		vm.clear = clear;
 		vm.cool = 0;
 		vm.name = 'Your playlist';
@@ -23,8 +23,6 @@
 		vm.querySearch = querySearch;
 		vm.removeTrack = removeTrack;
 		vm.saveToLocal = saveToLocal;
-		vm.selectedItemChange = selectedItemChange;
-		vm.searchTextChange   = searchTextChange;
 		vm.showAlert = showAlert;
 		vm.timeConvert = timeConvert;
 		vm.total = 0;
@@ -79,12 +77,8 @@
 			vm.totalTime = vm.totalTime - vm.items[idx].duration_ms;
 			vm.items.splice(idx, 1);
 		}
-		function searchTextChange(text) {
-		  // $log.info('Text changed to ' + text);
-		}
 
-		function selectedItemChange(item) {
-		  // $log.info('Item changed to ' + JSON.stringify(item));
+		function addToPlaylist(item) {
 		  if( item ){
 		  	$log.info(item);
 		  	vm.items.push(item);
