@@ -16,8 +16,10 @@ md-content {
   md-content label {
     font-size: 18px; }
   md-content #auto ul {
-    max-height: 125px;
+    max-height: 200px;
     opacity: 0.8; }
+  md-content #auto md-progress-linear {
+    display: none; }
   md-content #playlist {
     padding: 0;
     position: relative;

@@ -12,7 +12,6 @@
 		var vm = this;
 
 		vm.addToPlaylist = addToPlaylist;
-		vm.alert = '';
 		vm.clear = clear;
 		vm.cool = 0;
 		vm.name = 'Your playlist';
@@ -23,6 +22,7 @@
 		vm.querySearch = querySearch;
 		vm.removeTrack = removeTrack;
 		vm.saveToLocal = saveToLocal;
+		vm.searchText = undefined;
 		vm.showAlert = showAlert;
 		vm.timeConvert = timeConvert;
 		vm.total = 0;
@@ -36,6 +36,18 @@
 			this.tags = [];
 		}
 
+		function addToPlaylist(item) {
+		  if( item ){
+		  	$log.info(item);
+		  	vm.items.push(item);
+		  	vm.totalTime = vm.totalTime + item.duration_ms;
+		  	vm.cool = vm.cool + item.popularity;
+		  	vm.total = Math.floor(vm.cool / vm.items.length);
+
+		  	vm.searchText = '';
+		  }
+		}
+
 		function clear(){
 			vm.items = [];
 
@@ -45,16 +57,17 @@
 		}
 
 		function format(query) {
-		  var search = query.split(' '), result = '';
+			if( query ){
+		  	var search = query.split(' '), result = '';
 
-		  for( var i = 0; i < search.length; i++ ){
-		    if( i === search.length - 1){
-		   		result = result + search[i];
-		   	} else {
-		   		result = result + search[i] + '%20';
-		   	}
-		  }
-
+		  	for( var i = 0; i < search.length; i++ ){
+		    	if( i === search.length - 1){
+		   			result = result + search[i];
+		   		} else {
+		   			result = result + search[i] + '%20';
+		   		}
+		 	 }
+		 	}
 		  return result;
 		}
 
@@ -76,16 +89,6 @@
 			vm.total = vm.total - vm.items[idx].popularity;
 			vm.totalTime = vm.totalTime - vm.items[idx].duration_ms;
 			vm.items.splice(idx, 1);
-		}
-
-		function addToPlaylist(item) {
-		  if( item ){
-		  	$log.info(item);
-		  	vm.items.push(item);
-		  	vm.totalTime = vm.totalTime + item.duration_ms;
-		  	vm.cool = vm.cool + item.popularity;
-		  	vm.total = Math.floor(vm.cool / vm.items.length);
-		  }
 		}
 
 		function saveToLocal(){

@@ -25,8 +25,11 @@ md-content {
 
 	#auto {
 		ul {
-			max-height: 125px;
+			max-height: 200px;
 			opacity: 0.8;
+		}
+		md-progress-linear {
+			display: none;
 		}
 	}
 

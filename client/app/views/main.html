@@ -7,7 +7,6 @@
         <md-input ng-model="vm.name" type="text" maxlength="20"></md-input>
       </md-input-container>
 	      <md-autocomplete id="auto" class="animated fadeIn"
-	      	ng-disabled="vm.isDisabled"
 	        md-selected-item="vm.selectedItem"
 	        md-search-text="vm.searchText"
 	        md-selected-item-change="vm.addToPlaylist(track)"
@@ -29,7 +28,7 @@
 			<rating value="vm.total / 20" max="vm.max" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" readonly="vm.isReadonly"></rating></span>
 		</div>
 	   <div ui-sortable="sortableOptions" ng-model="vm.items" class="tracks">
-	     <div ng-repeat="item in vm.items" class="item animated fadeIn">
+	     <div ng-repeat="item in vm.items track by $index" class="item animated fadeIn">
 	       {{item.name}} by {{item.artists[0].name}} <br> {{ vm.timeConvert(item.duration_ms) }}
 	       <rating value="item.popularity / 20" max="vm.max" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" readonly="vm.isReadonly"></rating>
 	       <md-button id="remove" class="md-raised md-warn" ng-click="vm.removeTrack($index)">Remove</md-button>
