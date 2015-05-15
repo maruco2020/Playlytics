@@ -9,7 +9,8 @@
 	      <md-autocomplete id="auto" class="animated fadeIn"
 	        md-selected-item="vm.selectedItem"
 	        md-search-text="vm.searchText"
-	        md-selected-item-change="vm.addToPlaylist(track)"
+	        md-delay="50"
+	        md-selected-item-change="vm.addToPlaylist(track, track.duration_ms, track.popularity)"
 	        md-items="track in vm.querySearch(vm.searchText)"
 	        md-item-text="track.name"
 	        md-min-length="0"
@@ -25,12 +26,12 @@
 		<div id="total" class="ignore">
 			<span id="listName">{{ vm.name }}</span>
 			<span id="stats">{{ vm.timeConvert(vm.totalTime) }}
-			<rating value="vm.total / 20" max="vm.max" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" readonly="vm.isReadonly"></rating></span>
+			<rating value="vm.totalPop / vm.items.length / 20" max="5" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" readonly="vm.isReadonly"></rating></span>
 		</div>
 	   <div ui-sortable="sortableOptions" ng-model="vm.items" class="tracks">
 	     <div ng-repeat="item in vm.items track by $index" class="item animated fadeIn">
 	       {{item.name}} by {{item.artists[0].name}} <br> {{ vm.timeConvert(item.duration_ms) }}
-	       <rating value="item.popularity / 20" max="vm.max" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" readonly="vm.isReadonly"></rating>
+	       <rating value="item.popularity / 20" max="5" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" readonly="vm.isReadonly"></rating>
 	       <md-button id="remove" class="md-raised md-warn" ng-click="vm.removeTrack($index)">Remove</md-button>
 	     </div>
 	   </div>

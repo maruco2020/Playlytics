@@ -11,20 +11,22 @@ var shell = require('gulp-shell');
 gulp.task('index', function() {
 	var sources = gulp.src(bower(), {read: false});
 	var ng = gulp.src('client/**/*.js', {read: false});
+	var jQuery = gulp.src(__dirname + '/bower_components/jquery/dist/jquery.js', {read: false});
 
-	gulp.src(__dirname + '/client/views/index.html')
-			.pipe(inject(series(sources, ng)), {relative: true})
-			.pipe(gulp.dest(__dirname + '/client/views'));
+	gulp.src(__dirname + '/index.html')
+		.pipe(inject(jQuery, {name: 'jQuery'}))
+		.pipe(inject(series(sources, ng)), {relative: true})
+		.pipe(gulp.dest('./'));
 });
 
 gulp.task('styles', function() {
 	var styles = 'client/styles';
 
 	sass(styles)
-			.on('error', function(err) {
-				console.log('Error!', err.message);
-			})
-			.pipe(gulp.dest(styles));
+		.on('error', function(err) {
+			console.log('Error!', err.message);
+		})
+		.pipe(gulp.dest(styles));
 });
 
 gulp.task('karma', shell.task([

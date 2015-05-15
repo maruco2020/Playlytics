@@ -14,8 +14,8 @@ module.exports = function(config) {
 			'bower_components/angular-animate/angular-animate.js',
 			'bower_components/angular-aria/angular-aria.js',
 			'bower_components/angular-bootstrap/ui-bootstrap.js',
-			'client/sortable.js',
-			'client/ui-bootstrap-tpls-0.9.0.min.js',
+			'client/js/sortable.js',
+			'client/js/ui-bootstrap-tpls-0.9.0.min.js',
 
 			'client/app/**/*.js',
 
